@@ -3,6 +3,8 @@ import uiRouter from 'angular-ui-router';
 import MatchWindowHeight from './shared/utilities/match-window-height.directive';
 
 import ChatPageComponent from './containers/chat-page/chat-page.component';
+import TeamHeaderComponent from './components/team-header/team-header.component';
+import ChannelHeaderComponent from './components/channel-header/channel-header.component'
 
 const ChatModule = angular
   .module('components.chat', [
@@ -17,5 +19,7 @@ const ChatModule = angular
   })
   .directive('matchWindowHeight', MatchWindowHeight)
   .component('chatPage', ChatPageComponent)
+  .component('teamHeader', TeamHeaderComponent)
+  .component('channelHeader', ChannelHeaderComponent);
 
 export default ChatModule;
