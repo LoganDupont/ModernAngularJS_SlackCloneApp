@@ -6,5 +6,33 @@
     <channel-header
       active="$ctrl.activeThread"
     ></channel-header>
-  </header> 
+  </header>
+  
+  <div id="client-body">
+    <div id="col-messages">
+      <div class="row-fluid">
+        <div id="col-channels-bg"
+          style="z-index: 0;">
+        </div>
+
+        <div id="col-channels">
+          <div id="channels-scroller">
+            <thread-list
+              name="Channels"
+              threads="$ctrl.channels"
+              active="$ctrl.activeThread"
+              on-thread-selected="$ctrl.threadSelected($event);">
+            </thread-list>
+
+            <thread-list
+              name="Direct Messages"
+              threads="$ctrl.directMessages"
+              active="$ctrl.activeThread"
+              on-thread-selected="$ctrl.threadSelected($event);">
+            </thread-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

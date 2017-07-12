@@ -12,6 +12,11 @@ const ChatPageComponent = {
         name: 'eigenjoy'
       };
 
+      const auser = {
+        id: 'auser',
+        name: 'auser'
+      };
+
       this.channels = [
         {
           id: 'angular',
@@ -23,7 +28,13 @@ const ChatPageComponent = {
           name: 'redux',
           type: 'channel'
         }
-      ]
+      ];
+
+      this.directMessages = [{
+        id: 'auser',
+        name: 'auser',
+        type: 'dm'
+      }];
 
       this.currentUser = eigenjoy;
       this.activeThread = this.channels[0];
