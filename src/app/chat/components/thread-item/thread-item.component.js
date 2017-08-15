@@ -5,7 +5,7 @@ const ThreadItemComponent = {
     bindings: {
         thread: '<',
         active: '<',
-        onTreadSelected: '&'
+        onThreadSelected: '&'
     },
     templateUrl: template,
     controller: class ThreadItemController {

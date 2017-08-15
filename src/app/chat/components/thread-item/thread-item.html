@@ -1,5 +1,5 @@
 <li class="channel"
-    ng-class="{active: $ctrl.active.id = $ctrl.thread.id}">
+    ng-class="{active: $ctrl.active.id == $ctrl.thread.id}">
     <a href 
         ng-click="$ctrl.onThreadSelected({$event: $ctrl.thread});"
         class="channel-name">
