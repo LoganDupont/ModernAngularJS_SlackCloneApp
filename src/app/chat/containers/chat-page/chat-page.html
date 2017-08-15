@@ -7,6 +7,12 @@
       active="$ctrl.activeThread"
     ></channel-header>
   </header>
+
+  <div id="footer">
+    <message-input
+      on-send-message="$ctrl.sendMessage($event);"
+      ></message-input>
+  </div>
   
   <div id="client-body">
     <div id="col-messages">

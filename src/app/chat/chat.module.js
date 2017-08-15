@@ -9,7 +9,7 @@ import ThreadListComponent from './components/thread-list/thread-list.component'
 import ThreadItemComponent from './components/thread-item/thread-item.component';
 import MessageComponent from './components/message/message.component';
 import MessagesComponent from './components/messages/messages.component';
-
+import MessageInputComponent from './components/message-input/message-input.component';
 
 const ChatModule = angular
   .module('components.chat', [
@@ -29,6 +29,7 @@ const ChatModule = angular
   .component('threadList', ThreadListComponent)
   .component('threadItem', ThreadItemComponent)
   .component('messages', MessagesComponent)
-  .component('message', MessageComponent);
+  .component('message', MessageComponent)
+  .component('messageInput', MessageInputComponent);
 
 export default ChatModule;

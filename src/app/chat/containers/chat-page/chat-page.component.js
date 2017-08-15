@@ -63,7 +63,11 @@ const ChatPageComponent = {
       this.currentUser = eigenjoy;
       this.activeThread = this.channels[0];
     }
-  }  
+
+    sendMessage(message) {
+      console.log(message);
+    }
+  }
 };
 
 export default ChatPageComponent;
