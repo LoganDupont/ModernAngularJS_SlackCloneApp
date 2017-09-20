@@ -1,4 +1,4 @@
-import template from './root.component.html';
+import template from './root.html';
 
 const RootComponent = {
   templateUrl: template

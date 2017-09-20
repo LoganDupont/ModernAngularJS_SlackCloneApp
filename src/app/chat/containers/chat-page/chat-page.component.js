@@ -1,71 +1,45 @@
 import template from './chat-page.html';
+import { addMessage, selectThread } from '../../shared/threads/threads.actions';
+import { getChannels, getDirectMessages, getCurrentThread } from '../../shared/threads/threads.selectors';
+import { getCurrentUser } from '../../shared/users/users.selectors';
 
-const ChatPageComponent = {  
-  bindings: {},  
-  templateUrl: template,  
-  controller: class ChatPageController {  
-    /* @ngInject */  
-    constructor() {  
+const ChatPageComponent = {
+  bindings: {},
+  templateUrl: template,
+  controller: class ChatPageController {
+    /* @ngInject */
+    constructor($ngRedux) {
+      this.$ngRedux = $ngRedux;
+      this.unsubscribe = $ngRedux.connect(this.mapStateToThis, {})(this);
+    }
 
-      const eigenjoy = {
-        id: 'eigenjoy',
-        name: 'eigenjoy'
-      };
+    $onDestroy() {
+      this.unsubscribe();
+    }
 
-      const auser = {
-        id: 'auser',
-        name: 'auser'
-      };
+    mapStateToThis(state) {
+      return {
+        channels: getChannels(state),
+        directMessages: getDirectMessages(state),
+        activeThread: getCurrentThread(state),
+        currentUser: getCurrentUser(state),
+      }
+    }
 
-      this.channels = [
-        {
-          id: 'angular',
-          name: 'angular',
-          type: 'channel',
-          messages: [
-            {
-              author: eigenjoy,
-              text: 'hi',
-              sentAt: new Date()
-            },
-            {
-              author: auser,
-              text: 'hey',
-              sentAt: new Date()
-            }
-          ]
-        },
-        {
-          id: 'redux',
-          name: 'redux',
-          type: 'channel',
-          messages: [
-            {
-              author: eigenjoy,
-              text: 'Redux is cool',
-              sentAt: new Date()
-            },
-            {
-              author: auser,
-              text: 'It really is!',
-              sentAt: new Date()
-            }
-          ]
-        }
-      ];
-
-      this.directMessages = [{
-        id: 'auser',
-        name: 'auser',
-        type: 'dm',
-      }];
-
-      this.currentUser = eigenjoy;
-      this.activeThread = this.channels[0];
+    threadSelected(thread) {
+      this.$ngRedux.dispatch(selectThread(thread));
     }
 
     sendMessage(message) {
-      console.log(message);
+      if (messageText.length > 0) {
+        this.$ngRedux.dispatch(addMessage(
+          this.activeThread,
+          {
+            author: this.currentUser,
+            text: messageText
+          }
+        ));
+      }
     }
   }
 };
