@@ -30,7 +30,7 @@ const ChatPageComponent = {
       this.$ngRedux.dispatch(selectThread(thread));
     }
 
-    sendMessage(message) {
+    sendMessage(messageText) {
       if (messageText.length > 0) {
         this.$ngRedux.dispatch(addMessage(
           this.activeThread,
