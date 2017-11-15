@@ -28,14 +28,16 @@ const MessagesComponent = {
         }
 
         organizeThreadMessages() {
-            let groupedMessages = _.groupBy(
-                this.thread.messages,
-                (m) => moment(m.sentAt).format('YYYY-MM-DD')
-            );
+            if (this.thread) {
+                let groupedMessages = _.groupBy(
+                    this.thread.messages,
+                    (m) => moment(m.sentAt).format('YYYY-MM-DD')
+                );
 
-            this.messageDays = _.keys(groupedMessages)
-                .sort()
-                .map(k => _.sortBy(groupedMessages[k], 'sentAt'));
+                this.messageDays = _.keys(groupedMessages)
+                    .sort()
+                    .map(k => _.sortBy(groupedMessages[k], 'sentAt'));
+            }
         }
     }
 };

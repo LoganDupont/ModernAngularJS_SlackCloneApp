@@ -1,12 +1,13 @@
 import '../sass/styles.scss';
 import angular from 'angular';
 import ngRedux from 'ng-redux';
+import ngReduxUiRouter from 'redux-ui-router';
 import createLogger from 'redux-logger';
 import rootReducer from './root.reducer';
 import RootComponent from './root.component';
 import ChatModule from './chat/chat.module';
-import { default as DevTools, runDevTools} from './devTools';
-import { createSampleData } from '../../config/sampleData';
+import { default as DevTools, runDevTools } from './devTools';
+import thunk from 'redux-thunk';
 
 /**
  * @ngdoc module
@@ -20,21 +21,26 @@ import { createSampleData } from '../../config/sampleData';
 const RootModule = angular
   .module('root', [
     ngRedux,
+    ngReduxUiRouter,
     ChatModule.name
   ])
   .component('root', RootComponent);
 
 if (process.env.NODE_ENV === 'development') {
   RootModule
-    .config(/*@ngInject*/ ($ngReduxProvider) => {
-      $ngReduxProvider.createStoreWith(rootReducer, [ createLogger() ], [ DevTools.instrument() ]);
+    .config(/*@ngInject*/($ngReduxProvider) => {
+      $ngReduxProvider.createStoreWith(
+        rootReducer,
+        ['ngUiRouterMiddleware', thunk, createLogger()],
+        [DevTools.instrument()
+      ]);
     })
     .run(runDevTools)
-    .run(createSampleData)
 } else {
   RootModule
-    .config(/*@ngInject*/ ($ngReduxProvider) => {
-      $ngReduxProvider.createStoreWith(rootReducer, []);
+    .config(/*@ngInject*/($ngReduxProvider) => {
+      $ngReduxProvider.createStoreWith(rootReducer,
+        ['ngUiRouterMiddleware', thunk]);
     })
 }
 

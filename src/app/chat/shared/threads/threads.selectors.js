@@ -7,6 +7,8 @@ export const getThreadsEntities = createSelector(
     (state) => state.entities
 );
 
+export const getRouterState = (state) => state.router;
+
 export const getAllThreads = createSelector(
     getThreadsEntities,
     (entities) => Object.keys(entities).map(
@@ -27,5 +29,14 @@ export const getDirectMessages = createSelector(
 export const getCurrentThread = createSelector(
     getThreadsEntities,
     getThreadsState,
-    (entities, state) => entities[state.currentThreadId]
+    getRouterState,
+    (entities, threadState, routerState) => 
+    entities[getActiveThreadID(threadState, routerState)]
 );
+
+const getActiveThreadID = (threadState, routerState) => {
+    const activeThread = _.values(threadState.entities).find(
+        thread => thread.name === routerState.currentParams.thread
+    );
+    return activeThread ? activeThread.id : null;
+}

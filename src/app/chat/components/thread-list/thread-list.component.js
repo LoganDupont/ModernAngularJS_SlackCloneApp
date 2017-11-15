@@ -7,12 +7,7 @@ const ThreadListComponent = {
         active: '<',
         onThreadSelected: '&'
     },
-    templateUrl: template,
-    controller: class ThreadListController {
-        constructor() {
-            console.log('this.threads', this.threads);
-        }
-    }
+    templateUrl: template
 };
 
 export default ThreadListComponent;
