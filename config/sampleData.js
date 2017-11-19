@@ -1,6 +1,7 @@
 import moment from 'moment';
 import { uuid } from '../src/app/chat/shared/utilities/util';
 import { setCurrentUser } from '../src/app/chat/shared/users/users.actions';
+import { stateGo } from 'redux-ui-router';
 import {
   addThread,
   addMessage,
@@ -164,13 +165,21 @@ export /*@ngInject*/ function createSampleData($ngRedux, $stateParams) {
       sendMessageToServer(newUniversalThreadMessage[0].payload.message)
     )
     .then(() => {
+      let thread = threads.find(thread => thread.name === $stateParams.thread) || threads[0];
+
       [
         setCurrentUser(nate),
         ...threads.map(t => addThread(t)),
         fetchMessages(
-          threads.find(thread => thread.name === $stateParams.thread)
-        )
+          thread
+        ),
+        stateGo('chat.threads', { 
+          type: thread.type,
+          thread: thread.name
+        })
       ].map(a => $ngRedux.dispatch(a));
+
+      return thread;
     });
 }
 
