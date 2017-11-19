@@ -1,5 +1,5 @@
 import angular from 'angular';
-import uiRouter from 'angular-ui-router';
+import uiRouter from '@uirouter/angularjs';
 import MatchWindowHeight from './shared/utilities/match-window-height.directive';
 
 import ThreadsService from './shared/threads/threads.service';

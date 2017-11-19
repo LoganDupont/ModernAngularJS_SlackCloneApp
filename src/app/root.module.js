@@ -20,7 +20,7 @@ import thunk from 'redux-thunk';
  **/
 const RootModule = angular
   .module('root', [
-    ngRedux,
+    ngRedux.default,
     ngReduxUiRouter,
     ChatModule.name
   ])
